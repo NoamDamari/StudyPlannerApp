@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StudyPlannerApp</string>
+    <string name="title">כותרת</string>
+    <string name="deadline">דדליין</string>
+    <string name="hello">שלום</string>
+    <string name="user_name">שם משתמש</string>
+</resources>

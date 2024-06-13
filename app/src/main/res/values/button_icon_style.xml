@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="button_icon_style" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="backgroundTint">@color/blue_100</item>
+        <item name="iconTint">@color/blue_500</item>
+    </style>
+</resources>
