@@ -9,6 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="8dp"
@@ -85,6 +86,20 @@
             app:layout_constraintEnd_toStartOf="@+id/materialButton"
             app:layout_constraintTop_toTopOf="@+id/materialButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addTaskButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:tint="@color/blue_500"
+        android:backgroundTint="@color/blue_100"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:srcCompat="@drawable/icon_plus" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tasksRV"

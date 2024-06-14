@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.studyplannerapp.R
@@ -43,6 +44,10 @@ class TaskListFragment : Fragment() {
         })
 
         Glide.with(binding.root).load(R.drawable.icon_user).into(binding.userImageView)
+
+        binding.addTaskButton.setOnClickListener {
+            findNavController().navigate(R.id.action_taskListFragment_to_addTaskFragment)
+        }
     }
 
     override fun onDestroyView() {
