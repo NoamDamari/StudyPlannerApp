@@ -72,6 +72,6 @@ class TasksAdapter : RecyclerView.Adapter<TasksAdapter.TaskViewHolder> () {
 
     fun setTasksList (tasksList: List<Task>) {
         tasks = tasksList
-        //notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 }
