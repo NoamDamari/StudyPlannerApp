@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.studyplannerapp.R
+import com.example.studyplannerapp.data.models.Task
 import com.example.studyplannerapp.databinding.FragmentTaskListBinding
 
 class TaskListFragment : Fragment() {
@@ -39,7 +40,7 @@ class TaskListFragment : Fragment() {
             adapter = tasksAdapter
         }
 
-        viewModel.getTasks().observe(viewLifecycleOwner, Observer { tasks ->
+        viewModel.tasksLiveData?.observe(viewLifecycleOwner, Observer { tasks ->
             tasksAdapter.setTasksList(tasks)
         })
 

@@ -1,29 +1,36 @@
 package com.example.studyplannerapp.ui.all_tasks
 
+import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.studyplannerapp.R
 import com.example.studyplannerapp.data.models.Task
 import com.example.studyplannerapp.data.models.TaskType
+import com.example.studyplannerapp.data.repositories.TasksRepository
+import kotlinx.coroutines.launch
 import java.util.Date
 
-class TaskViewModel : ViewModel() {
+class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val tasksLiveData : MutableLiveData<List<Task>> = MutableLiveData();
+    private val repository = TasksRepository(application)
+    val tasksLiveData : LiveData<List<Task>>? = repository.getAllTasks()
 
-    init {
-        tasksLiveData.value = mutableListOf(
-            Task("Task 1" , "First Task", type = TaskType.PROJECT , course = "Android" , image = R.drawable.icon_assignment),
-            Task("Android Assignment" , "Assignment android Course", type = TaskType.PROJECT , course = "Android" , image = R.drawable.icon_edit),
-            Task("Android Project" , "Final project on android Course", type = TaskType.PROJECT , course = "Android" , image = R.drawable.icon_logout),
-            Task("Task 4" , "Task Number 4"),
-            Task("Task 5" , "Task Number 5"),
-            Task("Task 6" , "Task Number 6"),
-        )
+    private val _selectedTask = MutableLiveData<Task>()
+    val selectedTask: LiveData<Task> get() = _selectedTask
+
+    fun addTask(task: Task) {
+        repository.addTask(task)
     }
 
-    fun getTasks() : MutableLiveData<List<Task>> {
-        return tasksLiveData;
+    fun deleteTask(task: Task) {
+        repository.deleteTask(task)
     }
+
+    fun updateTask(task: Task) {
+        repository.updateTask(task)
+    }
+
 }
