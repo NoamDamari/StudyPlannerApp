@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="slider_style" parent="Widget.Material3.Slider">
+    <style name="sliderStyle" parent="Widget.Material3.Slider">
         <item name="thumbColor">@color/blue_500</item>
         <item name="thumbHeight">18dp</item>
         <item name="trackColorActive">@color/blue_500</item>

@@ -26,13 +26,13 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/blue_500" />
+            />
 
         <TextView
             android:id="@+id/taskTitleTV"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="8dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:singleLine="true"
@@ -80,7 +80,7 @@
 
         <com.google.android.material.slider.Slider
             android:id="@+id/taskSlider"
-            style="@style/slider_style"
+            style="@style/sliderStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

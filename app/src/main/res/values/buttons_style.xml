@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="button_style" parent="Widget.Material3.Button.TonalButton">
+    <style name="buttonStyle" parent="Widget.Material3.Button.TonalButton">
         <item name="backgroundTint">@color/blue_300</item>
         <item name="android:textColor">#224B67</item>
         <item name="cornerRadius">8dp</item>
