@@ -1,11 +1,14 @@
 package com.example.studyplannerapp.data.models
 
 import android.net.Uri
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.studyplannerapp.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 @Entity(tableName = "tasks_table")
@@ -20,7 +23,8 @@ data class Task(
         add(Calendar.DAY_OF_YEAR,1)
     }.timeInMillis,
     @ColumnInfo(name = "type")
-    var type: TaskType = TaskType.OTHER,
+    //var type: TaskType = TaskType.OTHER,
+    var type: String = "",
     @ColumnInfo(name = "course")
     var course: String = "",
     @ColumnInfo(name = "progress_percentage")
@@ -28,13 +32,13 @@ data class Task(
     @ColumnInfo(name = "status")
     var status: TaskStatus = TaskStatus.OPEN,
     @ColumnInfo(name = "image")
-    //var image: String? = null)
-    var image: Int? = null){
+    var image: String? = R.drawable.icon_assignment.toString()){
+    //var image: Int? = null){
     //var image: Uri? = null){
 
 
     fun getFormattedDeadline() : String {
-        val deadlineFormat = SimpleDateFormat("dd/MM/yy HH:mm" , Locale.getDefault())
+        val deadlineFormat = SimpleDateFormat("dd/MM/yyyy" , Locale.getDefault())
         return deadlineFormat.format(this.deadline)
     }
 }

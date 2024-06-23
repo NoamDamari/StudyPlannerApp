@@ -9,23 +9,47 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.example.studyplannerapp.R
+import com.example.studyplannerapp.data.models.Task
 import com.example.studyplannerapp.databinding.FragmentAddTaskBinding
+import com.example.studyplannerapp.ui.TasksViewModel
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
-
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 class AddTaskFragment : Fragment() {
 
     private var _binding: FragmentAddTaskBinding? = null
     private val binding get() = _binding!!
-
     private var imageUri: Uri? = null
+    private val viewModel: TasksViewModel by activityViewModels()
+
+    // Launcher for picking an image from the device storage
     private val pickImageLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
             uri?.let {
-                binding.resultImage.setImageURI(it)
+                // Apply transformations
+                val requestOptions = RequestOptions()
+                    .transform(CenterCrop(), RoundedCorners(30))
+
+                // Load image with Glide
+                Glide.with(binding.root)
+                    .load(uri)
+                    .apply(requestOptions)
+                    .into(binding.taskImage)
+
+                // Take persistable URI permission
                 requireActivity().contentResolver.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 imageUri = it
             }
@@ -35,9 +59,13 @@ class AddTaskFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentAddTaskBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Date picker dialog initialization
         val datePicker: MaterialDatePicker<Long> by lazy {
             val constraintsBuilder =
                 CalendarConstraints.Builder()
@@ -45,6 +73,7 @@ class AddTaskFragment : Fragment() {
 
             MaterialDatePicker.Builder.datePicker()
                 .setCalendarConstraints(constraintsBuilder.build())
+                .setTheme(R.style.datePickerStyle)
                 .build()
         }
 
@@ -53,15 +82,48 @@ class AddTaskFragment : Fragment() {
             datePicker.show(parentFragmentManager , "datePickerDialog")
         }
 
-        // Click handler to set selected date
+        // Click listener to set selected date
         datePicker.addOnPositiveButtonClickListener {
             binding.dateDialogBtn.text = datePicker.headerText
         }
 
+        // Click listener to launch image picker
         binding.pickImageBtn.setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
 
-        return binding.root
+        // Finish button click listener
+        binding.finishBtn.setOnClickListener {
+
+            val task = Task(
+                binding.taskTitleET.text.toString(),
+                binding.taskDescription.text.toString(),
+                parseStringToDate(binding.dateDialogBtn.text.toString()),
+                type = binding.taskTypeTF.text.toString(),
+                course = binding.courseET.text.toString(),
+                progressPercentage = binding.progressSlider.value.toInt(),
+                image = imageUri?.toString(),
+            )
+            viewModel.addTask(task)
+
+            findNavController().navigate(R.id.action_addTaskFragment_to_taskListFragment)
+        }
+    }
+    /**
+     * Parses a date string into a timestamp (in milliseconds).
+     * If parsing fails, returns a default value representing tomorrow's date.
+     */
+    private fun parseStringToDate(date: String) : Long {
+
+        val defaultValue = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR,1)
+        }.timeInMillis
+
+        return try {
+            val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+            dateFormat.parse(date)?.time ?: defaultValue
+        } catch (e: ParseException) {
+            defaultValue
+        }
     }
 }

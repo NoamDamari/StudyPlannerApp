@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
+    android:padding="10dp"
     tools:context=".ui.add_task.AddTaskFragment">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -29,14 +29,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.slider.Slider
-        android:id="@+id/slider"
-        style="@style/slider_style"
+        android:id="@+id/progressSlider"
+        style="@style/sliderStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:value="20.0"
+        android:value="0.0"
         android:valueFrom="0.0"
         android:valueTo="100.0"
+        android:stepSize="1"
+        app:tickVisible="false"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout5"
         app:layout_constraintTop_toBottomOf="@+id/dateDialogBtn"
         tools:layout_editor_absoluteX="8dp" />
@@ -52,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slider">
+        app:layout_constraintTop_toBottomOf="@+id/progressSlider">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/taskDescription"
@@ -84,7 +86,7 @@
         app:startIconDrawable="@drawable/icon_assignment">
 
         <AutoCompleteTextView
-            android:id="@+id/taskType"
+            android:id="@+id/taskTypeTF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
@@ -114,13 +116,13 @@
 
     <Button
         android:id="@+id/dateDialogBtn"
-        style="@style/button_style"
+        style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:gravity="center"
         android:text="Choose Date"
-        app:layout_constraintBottom_toTopOf="@+id/slider"
+        app:layout_constraintBottom_toTopOf="@+id/progressSlider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,33 +130,34 @@
 
     <Button
         android:id="@+id/pickImageBtn"
-        style="@style/button_style"
+        style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="Pick Image"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="@+id/result_image"
+        app:layout_constraintEnd_toEndOf="@+id/taskImage"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/result_image"
-        app:layout_constraintTop_toBottomOf="@+id/result_image" />
+        app:layout_constraintStart_toStartOf="@+id/taskImage"
+        app:layout_constraintTop_toBottomOf="@+id/taskImage" />
 
 
     <ImageView
-        android:id="@+id/result_image"
+        android:id="@+id/taskImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/icon_camera"
+        android:background="@drawable/rounded_background"
         app:layout_constraintBottom_toTopOf="@+id/pickImageBtn"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/finishBtn"
-        style="@style/button_style"
+        style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

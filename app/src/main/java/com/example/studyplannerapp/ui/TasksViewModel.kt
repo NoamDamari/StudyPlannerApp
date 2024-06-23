@@ -1,19 +1,13 @@
-package com.example.studyplannerapp.ui.all_tasks
+package com.example.studyplannerapp.ui
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.studyplannerapp.R
 import com.example.studyplannerapp.data.models.Task
-import com.example.studyplannerapp.data.models.TaskType
 import com.example.studyplannerapp.data.repositories.TasksRepository
-import kotlinx.coroutines.launch
-import java.util.Date
 
-class TaskViewModel(application: Application) : AndroidViewModel(application) {
+class TasksViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = TasksRepository(application)
     val tasksLiveData : LiveData<List<Task>>? = repository.getAllTasks()
