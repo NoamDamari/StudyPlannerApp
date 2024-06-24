@@ -16,13 +16,11 @@ abstract class TasksDataBase : RoomDatabase() {
         @Volatile
         private var instance: TasksDataBase? = null
 
-        //TODO: remove allowMainThreadQueries
         fun getDatabase(context: Context) = instance ?: synchronized(this){
             Room.databaseBuilder(
                 context.applicationContext,
                 TasksDataBase::class.java,
                 "tasks_database")
-                .allowMainThreadQueries()
                 .build().also { instance = it }
         }
     }
