@@ -13,13 +13,13 @@ import com.example.studyplannerapp.data.models.Task
 interface TasksDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addTask(task: Task)
+    suspend fun addTask(task: Task)
 
     @Delete
-    fun deleteTask(vararg task: Task)
+    suspend fun deleteTask(vararg task: Task)
 
     @Update
-    fun updateTask(task: Task)
+    suspend fun updateTask(task: Task)
 
     @Query("SELECT * from tasks_table")
     fun getAllTasks() : LiveData<List<Task>>

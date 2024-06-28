@@ -59,24 +59,25 @@ class TaskListFragment : Fragment() , TasksAdapter.TaskItemListener {
 
         // Building MaterialAlertDialogBuilder for deleting tasks
         deleteDialogBuilder = MaterialAlertDialogBuilder(requireContext() , R.style.AlertDialog)
-            .setTitle("Delete Task")
-            .setMessage("Are you sure you want to delete this task?")
-            .setNegativeButton("No") { dialog, _ ->
-                // Handle "No" button click: dismiss the dialog
-                dialog.dismiss()
-            }
-            .setPositiveButton("Yes") { _, _ ->
+            .setTitle(getString(R.string.delete_dialog_title))
+            .setMessage(getString(R.string.delete_dialog_message))
+            .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 // Handle "yes" button click: Delete the task, update RecyclerView, and show a success Toast
                 if(positionToDelete != -1) {
                     val task = tasksAdapter.taskAt(positionToDelete)
                     viewModel.deleteTask(task)
-                    Toast.makeText(requireContext(), "Task deleted successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.delete_confirmation_alert), Toast.LENGTH_SHORT).show()
                 }
+            }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                // Handle "No" button click: dismiss the dialog
+                dialog.dismiss()
             }
             .setOnDismissListener {
                 // Update RecyclerView on dialog dismissed
                 tasksAdapter.notifyItemChanged(positionToDelete)
             }
+
 
         // Initialize ItemTouchHelper for handling actions on RecyclerView items
         ItemTouchHelper(object : ItemTouchHelper.Callback(){

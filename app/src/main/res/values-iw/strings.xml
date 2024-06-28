@@ -5,4 +5,22 @@
     <string name="deadline">דדליין</string>
     <string name="hello">שלום</string>
     <string name="user_name">שם משתמש</string>
+    <string name="pick_image">תמונה</string>
+    <string name="select_date">בחירת תאריך</string>
+    <string name="finish">סיום</string>
+    <string name="task_name">שם המשימה</string>
+    <string name="course">קורס</string>
+    <string name="type">סוג המשימה</string>
+    <string name="description">תיאור</string>
+    <string name="delete_dialog_title">מחיקת משימה</string>
+    <string name="delete_dialog_message">האם את/ה בטוח/ה שברצונך למחוק את המשימה הזו?</string>
+    <string name="delete_confirmation_alert">משימה נמחקה בהצלחה</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="assignment">מטלה</string>
+    <string name="exam">בחינה</string>
+    <string name="project">פרוייקט</string>
+    <string name="video">סרטון</string>
+    <string name="other">אחר</string>
+    <string name="lesson">שיעור</string>
 </resources>
