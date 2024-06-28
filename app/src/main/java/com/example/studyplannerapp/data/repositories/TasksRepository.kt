@@ -4,6 +4,9 @@ import android.app.Application
 import com.example.studyplannerapp.data.local_db.TasksDao
 import com.example.studyplannerapp.data.local_db.TasksDataBase
 import com.example.studyplannerapp.data.models.Task
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
 class TasksRepository(application: Application) {
 
@@ -16,15 +19,15 @@ class TasksRepository(application: Application) {
 
     fun getAllTasks() = tasksDao?.getAllTasks()
 
-    fun addTask(task: Task) {
+    suspend fun addTask(task: Task) {
         tasksDao?.addTask(task)
     }
 
-    fun deleteTask(vararg task: Task) {
+    suspend fun deleteTask(vararg task: Task) {
         tasksDao?.deleteTask(*task)
     }
 
-    fun updateTask(task: Task) {
+    suspend fun updateTask(task: Task) {
         tasksDao?.updateTask(task)
     }
 }
