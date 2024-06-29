@@ -19,6 +19,8 @@ class TasksRepository(application: Application) {
 
     fun getAllTasks() = tasksDao?.getAllTasks()
 
+    fun getTask(id: Long) = tasksDao?.getTask(id)
+
     suspend fun addTask(task: Task) {
         tasksDao?.addTask(task)
     }

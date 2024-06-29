@@ -23,4 +23,7 @@ interface TasksDao {
 
     @Query("SELECT * from tasks_table")
     fun getAllTasks() : LiveData<List<Task>>
+
+    @Query("SELECT * from tasks_table WHERE id = :id")
+    fun getTask(id: Long) : LiveData<Task>
 }
