@@ -13,7 +13,9 @@ import java.util.Locale
 
 @Entity(tableName = "tasks_table")
 data class Task(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    val id: Long = 0L,
     @ColumnInfo(name = "title")
     var title: String = "Task",
     @ColumnInfo(name = "description")
@@ -23,22 +25,16 @@ data class Task(
         add(Calendar.DAY_OF_YEAR,1)
     }.timeInMillis,
     @ColumnInfo(name = "type")
-    //var type: TaskType = TaskType.OTHER,
     var type: String = "",
     @ColumnInfo(name = "course")
     var course: String = "",
     @ColumnInfo(name = "progress_percentage")
     var progressPercentage: Int = 0,
-    @ColumnInfo(name = "status")
-    var status: TaskStatus = TaskStatus.OPEN,
     @ColumnInfo(name = "image")
     var image: String? = R.drawable.icon_assignment.toString()){
-    //var image: Int? = null){
-    //var image: Uri? = null){
-
 
     fun getFormattedDeadline() : String {
-        val deadlineFormat = SimpleDateFormat("dd/MM/yyyy" , Locale.getDefault())
+        val deadlineFormat = SimpleDateFormat("MMM dd, yyyy" , Locale.getDefault())
         return deadlineFormat.format(this.deadline)
     }
 }

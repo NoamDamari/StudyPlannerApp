@@ -1,10 +1,8 @@
 package com.example.studyplannerapp.ui.all_tasks
 
-import android.content.res.ColorStateList
-import android.graphics.Color
+
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.RoundedCorner
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -17,12 +15,17 @@ import com.example.studyplannerapp.R
 import com.example.studyplannerapp.data.models.Task
 import com.example.studyplannerapp.databinding.TaskLayoutBinding
 
-class TasksAdapter(private val listener: TaskItemListener) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder> () {
+class TasksAdapter(val listener: TaskItemListener) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder> () {
 
     private var tasks : MutableList<Task> = mutableListOf()
 
-    class TaskViewHolder(private val binding: TaskLayoutBinding)
-        : RecyclerView.ViewHolder(binding.root){
+    inner class TaskViewHolder(private val binding: TaskLayoutBinding)
+        : RecyclerView.ViewHolder(binding.root) , View.OnLongClickListener{
+
+            init {
+                binding.root.setOnLongClickListener(this)
+            }
+
             fun bind(task: Task , onMenuButtonClick: (View, Task) -> Unit) {
 
                 binding.taskTitleTV.text = task.title
@@ -53,6 +56,11 @@ class TasksAdapter(private val listener: TaskItemListener) : RecyclerView.Adapte
                     onMenuButtonClick(it , task)
                 }
             }
+
+        override fun onLongClick(v: View?): Boolean {
+            listener.onTaskLongClick(adapterPosition)
+            return true
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -102,6 +110,7 @@ class TasksAdapter(private val listener: TaskItemListener) : RecyclerView.Adapte
 
     interface TaskItemListener {
         fun onDeleteOptionClicked(position: Int)
-        fun onEditOptionClicked(position: Int);
+        fun onEditOptionClicked(position: Int)
+        fun onTaskLongClick(position: Int)
     }
 }

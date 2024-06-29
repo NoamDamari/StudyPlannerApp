@@ -96,9 +96,9 @@ class AddTaskFragment : Fragment() {
         binding.finishBtn.setOnClickListener {
 
             val task = Task(
-                binding.taskTitleET.text.toString(),
-                binding.taskDescription.text.toString(),
-                parseStringToDate(binding.dateDialogBtn.text.toString()),
+                title = binding.taskTitleET.text.toString(),
+                description = binding.taskDescription.text.toString(),
+                deadline =  parseStringToDate(binding.dateDialogBtn.text.toString()),
                 type = binding.taskTypeTF.text.toString(),
                 course = binding.courseET.text.toString(),
                 progressPercentage = binding.progressSlider.value.toInt(),

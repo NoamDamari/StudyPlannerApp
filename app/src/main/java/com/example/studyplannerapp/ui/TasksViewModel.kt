@@ -18,6 +18,10 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
     private val _selectedTask = MutableLiveData<Task>()
     val selectedTask: LiveData<Task> get() = _selectedTask
 
+    fun selectTask(task : Task) {
+        _selectedTask.value = task
+    }
+
     fun addTask(task: Task) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addTask(task)

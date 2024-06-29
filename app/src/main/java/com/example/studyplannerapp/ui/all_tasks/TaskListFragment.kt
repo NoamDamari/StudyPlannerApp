@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -120,8 +120,17 @@ class TaskListFragment : Fragment() , TasksAdapter.TaskItemListener {
         positionToDelete = position
         deleteDialogBuilder.show()
     }
+
     override fun onEditOptionClicked(position: Int) {
+        val selectedTask = tasksAdapter.taskAt(position)
+        viewModel.selectTask(selectedTask);
         findNavController().navigate(R.id.action_taskListFragment_to_editTaskFragment)
     }
 
+    override fun onTaskLongClick(position: Int) {
+        val taskId = tasksAdapter.taskAt(position).id
+        findNavController().navigate(R.id.action_taskListFragment_to_taskDetailsFragment ,
+            bundleOf("id" to taskId)
+        )
+    }
 }
