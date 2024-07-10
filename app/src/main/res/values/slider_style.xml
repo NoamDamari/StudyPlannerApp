@@ -3,7 +3,7 @@
 
     <style name="sliderStyle" parent="Widget.Material3.Slider">
         <item name="thumbColor">@color/blue_500</item>
-        <item name="thumbHeight">18dp</item>
+        <item name="thumbHeight">16dp</item>
         <item name="trackColorActive">@color/blue_500</item>
         <item name="trackColorInactive">@color/blue_400</item>
         <item name="trackHeight">10dp</item>

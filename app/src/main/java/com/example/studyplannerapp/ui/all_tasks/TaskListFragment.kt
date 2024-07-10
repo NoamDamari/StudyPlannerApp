@@ -18,6 +18,7 @@ import com.example.studyplannerapp.R
 import com.example.studyplannerapp.databinding.FragmentTaskListBinding
 import com.example.studyplannerapp.ui.TasksViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class TaskListFragment : Fragment() , TasksAdapter.TaskItemListener {
 
@@ -54,7 +55,9 @@ class TaskListFragment : Fragment() , TasksAdapter.TaskItemListener {
 
         // Observe changes in tasksLiveData using ViewModel and update UI accordingly
         viewModel.tasksLiveData?.observe(viewLifecycleOwner, Observer { tasks ->
+
             tasksAdapter.setTasksList(tasks) // Update RecyclerView's task list
+            binding.textView4.text = getString(R.string.open_tasks_count, tasks.size)
         })
 
         // Building MaterialAlertDialogBuilder for deleting tasks
@@ -66,7 +69,8 @@ class TaskListFragment : Fragment() , TasksAdapter.TaskItemListener {
                 if(positionToDelete != -1) {
                     val task = tasksAdapter.taskAt(positionToDelete)
                     viewModel.deleteTask(task)
-                    Toast.makeText(requireContext(), getString(R.string.delete_confirmation_alert), Toast.LENGTH_SHORT).show()
+                    val snackbar = Snackbar.make(requireView(),getString(R.string.delete_confirmation_alert),Snackbar.LENGTH_SHORT)
+                    snackbar.show()
                 }
             }
             .setNegativeButton(getString(R.string.no)) { dialog, _ ->

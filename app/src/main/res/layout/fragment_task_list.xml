@@ -73,6 +73,8 @@
             android:layout_height="wrap_content"
             app:icon="@drawable/icon_menu"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/materialButton2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
@@ -83,6 +85,8 @@
             app:icon="@drawable/icon_logout"
             app:layout_constraintBottom_toBottomOf="@+id/materialButton"
             app:layout_constraintEnd_toStartOf="@+id/materialButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="@+id/materialButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -190,7 +194,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You have 12 Open Tasks"
+        android:text="@string/open_tasks_count"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView3"

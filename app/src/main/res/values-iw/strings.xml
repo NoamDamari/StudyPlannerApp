@@ -23,4 +23,8 @@
     <string name="video">סרטון</string>
     <string name="other">אחר</string>
     <string name="lesson">שיעור</string>
+    <string name="save_changes">שמור שינויים</string>
+    <string name="edit">עריכה</string>
+    <string name="delete">מחיקה</string>
+    <string name="open_tasks_count">"יש לך %1$d מטלות "</string>
 </resources>
