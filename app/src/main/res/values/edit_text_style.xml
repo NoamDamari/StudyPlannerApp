@@ -9,17 +9,21 @@
         <item name="hintTextAppearance">@style/TextAppearance.Material3.BodyMedium</item>
     </style>
 
-    <style name="editTextMenuStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-        <item name="autoCompleteTextViewStyle">@layout/dropdown_item</item>
-        <item name="backgroundTint">@color/blue_100</item>
-        <item name="color">@color/edit_text_color_selector</item>
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.ExposedDropdownMenu</item>
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/edit_text_color_selector</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="hintTextColor">@color/edit_text_color_selector</item>
+        <item name="endIconTint">@color/edit_text_color_selector</item>
+        <item name="startIconTint">@color/edit_text_color_selector</item>
+        <item name="hintTextAppearance">@style/TextAppearance.Material3.BodyMedium</item>
     </style>
 
-    <style name="ThemeOverlay.App.ExposedDropdownMenu" parent="">
-        <item name="colorPrimary">@color/blue_500</item>
-        <item name="colorOnSurface">@color/blue_100</item>
-        <item name="colorError">#6A061D</item>
-        <item name="autoCompleteTextViewStyle">@style/Widget.Material3.AutoCompleteTextView.OutlinedBox</item>
+    <style name="CustomAutoCompleteTextView" parent="ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox">
+        <item name="android:popupTheme">@style/popupMenuStyle</item>
+        <item name="android:dropDownSelector">#B2DDFF</item>
+    </style>
+
+    <style name="popupMenuStyle" parent="Widget.Material3.PopupMenu">
+        <item name="android:backgroundTint">#EBF6FF</item>
     </style>
 </resources>

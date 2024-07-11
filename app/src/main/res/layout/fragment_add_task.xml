@@ -36,14 +36,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
+        android:stepSize="1"
         android:value="0.0"
         android:valueFrom="0.0"
         android:valueTo="100.0"
-        android:stepSize="1"
-        app:tickVisible="false"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateDialogBtn"
-        tools:layout_editor_absoluteX="8dp" />
+        app:tickVisible="false" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout5"
@@ -74,7 +75,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout6"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        style="@style/CustomTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -90,11 +91,16 @@
 
         <AutoCompleteTextView
             android:id="@+id/taskTypeTF"
+            style="@style/CustomAutoCompleteTextView"
+            android:backgroundTint="@color/blue_100"
+            android:textColor="@color/blue_500"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
             android:paddingTop="16dp"
             android:paddingEnd="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
             app:simpleItems="@array/task_types_options" />
     </com.google.android.material.textfield.TextInputLayout>
 
