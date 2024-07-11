@@ -2,6 +2,7 @@ package com.example.studyplannerapp.ui.all_tasks
 
 
 import android.net.Uri
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,7 +81,8 @@ class TasksAdapter(val listener: TaskItemListener) : RecyclerView.Adapter<TasksA
 
     private fun showTaskPopupMenu(view: View , task: Task , position: Int) {
 
-        val taskMenu = PopupMenu(view.context , view)
+        val contextThemeWrapper = ContextThemeWrapper(view.context, R.style.popupMenuStyle)
+        val taskMenu = PopupMenu(contextThemeWrapper , view)
         taskMenu.menuInflater.inflate(R.menu.task_options_menu , taskMenu.menu)
         taskMenu.setOnMenuItemClickListener {menuOption ->
             when(menuOption.itemId) {
