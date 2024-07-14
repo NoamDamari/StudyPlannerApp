@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -17,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.studyplannerapp.R
 import com.example.studyplannerapp.databinding.FragmentTaskListBinding
 import com.example.studyplannerapp.ui.TasksViewModel
+import com.example.studyplannerapp.utils.AlarmUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -69,6 +69,9 @@ class TaskListFragment : Fragment() , TasksAdapter.TaskItemListener {
                 if(positionToDelete != -1) {
                     val task = tasksAdapter.taskAt(positionToDelete)
                     viewModel.deleteTask(task)
+
+                    AlarmUtils.cancelAlarm(requireContext(),task.id.toInt())
+
                     val snackbar = Snackbar.make(requireView(),getString(R.string.delete_confirmation_alert),Snackbar.LENGTH_SHORT)
                     snackbar.show()
                 }

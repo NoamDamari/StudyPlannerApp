@@ -18,13 +18,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.studyplannerapp.R
 import com.example.studyplannerapp.databinding.FragmentEditTaskBinding
 import com.example.studyplannerapp.ui.TasksViewModel
+import com.example.studyplannerapp.utils.AlarmUtils
+import com.example.studyplannerapp.utils.DateTimeUtils
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import com.google.android.material.snackbar.Snackbar
 
 class EditTaskFragment : Fragment() {
 
@@ -121,36 +120,35 @@ class EditTaskFragment : Fragment() {
 
         binding.saveChangesBtn.setOnClickListener {
 
+            val currentDeadline = viewModel.selectedTask.value?.deadline
+
             viewModel.selectedTask.value?.apply {
                 title = binding.taskTitleEdit.text.toString()
                 description = binding.taskDescriptionEdit.text.toString()
-                deadline = parseStringToDate(binding.taskDateEditBtn.text.toString())
+                deadline = DateTimeUtils.parseStringToDate(binding.taskDateEditBtn.text.toString())
                 type =  binding.taskTypeEdit.text.toString()
                 course = binding.taskCourseEdit.text.toString()
                 progressPercentage = binding.taskSliderEdit.value.toInt()
                 image = imageUri?.toString() ?: this.image
             }
 
-            viewModel.selectedTask.value?.let { task -> viewModel.updateTask(task) }
+            viewModel.selectedTask.value?.let { task ->
+
+                viewModel.updateTask(task)
+
+                // Update alarm notification if task deadline has changed
+                if(task.deadline != currentDeadline) {
+                    AlarmUtils.setAlarmNotification(requireContext(),task)
+
+                    // Displaying notification update message for testing
+                        Snackbar.make(
+                            requireView(),
+                            "notification updated",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                }
+            }
             findNavController().navigate(R.id.action_editTaskFragment_to_taskListFragment)
-        }
-    }
-
-    /**
-     * Parses a date string into a timestamp (in milliseconds).
-     * If parsing fails, returns a default value representing tomorrow's date.
-     */
-    private fun parseStringToDate(date: String) : Long {
-
-        val defaultValue = Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_YEAR,1)
-        }.timeInMillis
-
-        return try {
-            val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
-            dateFormat.parse(date)?.time ?: defaultValue
-        } catch (e: ParseException) {
-            defaultValue
         }
     }
 }

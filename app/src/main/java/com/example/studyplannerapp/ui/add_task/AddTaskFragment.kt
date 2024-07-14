@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
@@ -20,13 +19,11 @@ import com.example.studyplannerapp.R
 import com.example.studyplannerapp.data.models.Task
 import com.example.studyplannerapp.databinding.FragmentAddTaskBinding
 import com.example.studyplannerapp.ui.TasksViewModel
+import com.example.studyplannerapp.utils.AlarmUtils
+import com.example.studyplannerapp.utils.DateTimeUtils
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 
 class AddTaskFragment : Fragment() {
@@ -97,9 +94,10 @@ class AddTaskFragment : Fragment() {
         binding.finishBtn.setOnClickListener {
 
             val task = Task(
+                id = generateUniqueId(),
                 title = binding.taskTitleET.text.toString(),
                 description = binding.taskDescription.text.toString(),
-                deadline =  parseStringToDate(binding.dateDialogBtn.text.toString()),
+                deadline =  DateTimeUtils.parseStringToDate(binding.dateDialogBtn.text.toString()),
                 type = binding.taskTypeTF.text.toString(),
                 course = binding.courseET.text.toString(),
                 progressPercentage = binding.progressSlider.value.toInt(),
@@ -107,26 +105,13 @@ class AddTaskFragment : Fragment() {
             )
             viewModel.addTask(task)
 
+            AlarmUtils.setAlarmNotification(requireContext(),task)
+
             findNavController().navigate(R.id.action_addTaskFragment_to_taskListFragment)
         }
-
-
     }
-    /**
-     * Parses a date string into a timestamp (in milliseconds).
-     * If parsing fails, returns a default value representing tomorrow's date.
-     */
-    private fun parseStringToDate(date: String) : Long {
 
-        val defaultValue = Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_YEAR,1)
-        }.timeInMillis
-
-        return try {
-            val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
-            dateFormat.parse(date)?.time ?: defaultValue
-        } catch (e: ParseException) {
-            defaultValue
-        }
+    private fun generateUniqueId(): Long {
+        return System.currentTimeMillis()
     }
 }
