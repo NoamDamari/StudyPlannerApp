@@ -40,14 +40,14 @@
         android:value="0.0"
         android:valueFrom="0.0"
         android:valueTo="100.0"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout5"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionTextLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateDialogBtn"
         app:tickVisible="false" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout5"
+        android:id="@+id/descriptionTextLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:maxHeight="220dp"
@@ -154,6 +154,17 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/taskImage"
         app:layout_constraintTop_toBottomOf="@+id/taskImage" />
+
+    <Button
+        android:id="@+id/toRecognizeTextBtn"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload"
+        android:textSize="18sp"
+        android:textColor="@color/blue_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionTextLayout" />
 
     <ImageView
         android:id="@+id/taskImage"

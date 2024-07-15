@@ -75,6 +75,9 @@ class AddTaskFragment : Fragment() {
                 .build()
         }
 
+        val text = arguments?.getString("description")
+        binding.taskDescription.setText(text)
+
         // Show date picker dialog when button clicked
         binding.dateDialogBtn.setOnClickListener {
             datePicker.show(parentFragmentManager , "datePickerDialog")
@@ -88,6 +91,10 @@ class AddTaskFragment : Fragment() {
         // Click listener to launch image picker
         binding.pickImageBtn.setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
+        }
+
+        binding.toRecognizeTextBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_addTaskFragment_to_textRecognitionFragment)
         }
 
         // Finish button click listener
