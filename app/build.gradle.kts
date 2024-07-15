@@ -58,4 +58,5 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.2")
+    implementation ("com.google.mlkit:text-recognition:16.0.0")
 }

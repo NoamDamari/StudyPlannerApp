@@ -43,6 +43,9 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_addTaskFragment_to_textRecognitionFragment"
+            app:destination="@id/textRecognitionFragment" />
     </fragment>
     <fragment
         android:id="@+id/editTaskFragment"
@@ -65,5 +68,14 @@
         <action
             android:id="@+id/action_taskDetailsFragment_to_taskListFragment"
             app:destination="@id/taskListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/textRecognitionFragment"
+        android:name="com.example.studyplannerapp.ui.TextRecognitionFragment"
+        android:label="fragment_text_recognition"
+        tools:layout="@layout/fragment_text_recognition" >
+        <action
+            android:id="@+id/action_textRecognitionFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
     </fragment>
 </navigation>

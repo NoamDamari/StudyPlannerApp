@@ -109,36 +109,4 @@ class PermissionHandler() {
             ) == PackageManager.PERMISSION_GRANTED
         }
     }
-
-    /*fun checkNotificationPermission() {
-            if (ActivityCompat.checkSelfPermission(
-                    this.activity,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                // Permission already granted
-                Snackbar.make(
-                    activity.findViewById(android.R.id.content),
-                    "Notification permission already granted",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-
-                AppUtils.createNotificationsChannel(activity)
-            }else {
-                // Permission not granted, check if we should show rationale
-                if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.POST_NOTIFICATIONS)) {
-                    // Show an explanation to the user
-                    Snackbar.make(
-                        activity.findViewById(android.R.id.content),
-                        "Notification permission is required to send you reminders.",
-                        Snackbar.LENGTH_LONG
-                    ).setAction("Grant") {
-                        requestNotificationPermission()
-                    }.show()
-                } else {
-                    // Permission not granted, request it
-                    requestNotificationPermission()
-                }
-            }
-        }*/
 }
