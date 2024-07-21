@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StudyPlannerApp</string>
+    <string name="app_name">StudyFlowApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title">Title</string>
     <string name="deadline">Deadline</string>
@@ -74,5 +74,6 @@
     <string name="set_profile_image">Set Profile Image</string>
     <string name="set_profile_detalis">Set Profile Detalis</string>
     <string name="set_profile">Set Profile</string>
+    <string name="welcome_to_n_studyflow_app">Welcome to \n StudyFlow App!</string>
 
 </resources>

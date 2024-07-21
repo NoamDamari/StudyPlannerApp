@@ -28,7 +28,7 @@
             app:endIconDrawable="@drawable/icon_remove"
             app:endIconMode="clear_text"
             app:hintEnabled="true"
-            android:textColorHint="#7C7F8F"
+            android:textColorHint="@color/hint_color"
             app:layout_constraintBottom_toTopOf="@+id/outlinedTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +39,8 @@
                 android:id="@+id/taskTitleET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:colorControlActivated="@color/edit_text_color_selector"
                 android:hint="@string/task_name"
                 android:inputType="text" />
@@ -69,6 +71,7 @@
             android:layout_marginStart="4dp"
             android:gravity="center"
             android:hint="@string/type"
+            android:textColorHint="@color/hint_color"
             app:layout_constraintBottom_toBottomOf="@+id/outlinedTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -110,7 +113,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/courseET"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -128,6 +133,8 @@
             android:minHeight="52dp"
             android:text="@string/set_deadline"
             android:textColor="#F6F6F6"
+            android:ellipsize="end"
+            android:singleLine="true"
             app:icon="@drawable/icon_calendar"
             app:iconSize="28dp"
             app:iconTint="#F6F6F6"
@@ -147,6 +154,8 @@
             android:text="@string/description"
             android:textColor="#F6F6F6"
             android:textSize="18sp"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:backgroundTint="@color/blue_500"
             app:icon="@drawable/icon_upload"
             app:iconSize="24dp"
@@ -185,6 +194,8 @@
             android:textStyle="bold"
             app:icon="@drawable/icon_upload"
             app:iconSize="24dp"
+            android:ellipsize="end"
+            android:singleLine="true"
             app:iconTint="@color/blue_500"
             app:layout_constraintBottom_toBottomOf="@+id/taskImage"
             app:layout_constraintEnd_toEndOf="parent"
@@ -211,10 +222,10 @@
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         android:maxHeight="220dp"
-        android:textColorHint="#737373"
         android:theme="@style/TextInputLayoutAppearance"
         app:endIconDrawable="@drawable/icon_remove"
         app:endIconMode="clear_text"
+        android:textColorHint="@color/hint_color"
         app:layout_constraintBottom_toTopOf="@+id/finishBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

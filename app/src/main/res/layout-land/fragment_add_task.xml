@@ -42,6 +42,8 @@
             android:textStyle="bold"
             app:icon="@drawable/icon_upload"
             app:iconSize="24dp"
+            android:ellipsize="end"
+            android:singleLine="true"
             app:iconTint="@color/blue_500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -67,7 +69,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/courseET"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -76,7 +80,7 @@
         style="@style/editTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColorHint="#7C7F8F"
+        android:textColorHint="@color/hint_color"
         android:theme="@style/TextInputLayoutAppearance"
         app:endIconDrawable="@drawable/icon_remove"
         app:endIconMode="clear_text"
@@ -92,6 +96,8 @@
             android:id="@+id/taskTitleET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:hint="@string/task_name" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -104,6 +110,7 @@
         android:layout_marginStart="4dp"
         android:gravity="center"
         android:hint="@string/type"
+        android:textColorHint="@color/hint_color"
         app:layout_constraintBottom_toBottomOf="@+id/outlinedTextField"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintHorizontal_bias="0.5"
@@ -138,6 +145,8 @@
         android:insetBottom="0dp"
         android:minHeight="52dp"
         android:text="@string/deadline"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:textColor="#F6F6F6"
         app:icon="@drawable/icon_calendar"
         app:iconSize="28dp"
@@ -175,7 +184,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:maxHeight="220dp"
-        android:textColorHint="#737373"
+        android:textColorHint="@color/hint_color"
         android:theme="@style/TextInputLayoutAppearance"
         app:endIconDrawable="@drawable/icon_remove"
         app:endIconMode="clear_text"
@@ -229,6 +238,8 @@
         app:icon="@drawable/icon_upload"
         app:iconSize="24dp"
         app:iconTint="#F6F6F6"
+        android:ellipsize="end"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/dateDialogBtn"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintHorizontal_bias="0.5"
