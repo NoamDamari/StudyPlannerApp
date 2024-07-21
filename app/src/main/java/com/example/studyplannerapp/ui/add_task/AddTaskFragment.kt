@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -56,7 +57,7 @@ class AddTaskFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddTaskBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -75,8 +76,11 @@ class AddTaskFragment : Fragment() {
                 .build()
         }
 
-        val text = arguments?.getString("description")
-        binding.taskDescription.setText(text)
+        setFragmentResultListener("requestKey") { _, bundle ->
+            val description = bundle.getString("description")
+            // Update the UI with the received description
+            binding.taskDescription.setText(description)
+        }
 
         // Show date picker dialog when button clicked
         binding.dateDialogBtn.setOnClickListener {
@@ -93,7 +97,13 @@ class AddTaskFragment : Fragment() {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
 
+        // Click listener to launch image picker
+        binding.taskImage.setOnClickListener {
+            pickImageLauncher.launch(arrayOf("image/*"))
+        }
+
         binding.toRecognizeTextBtn.setOnClickListener {
+
             findNavController().navigate(R.id.action_addTaskFragment_to_textRecognitionFragment)
         }
 
@@ -101,7 +111,6 @@ class AddTaskFragment : Fragment() {
         binding.finishBtn.setOnClickListener {
 
             val task = Task(
-                id = generateUniqueId(),
                 title = binding.taskTitleET.text.toString(),
                 description = binding.taskDescription.text.toString(),
                 deadline =  DateTimeUtils.parseStringToDate(binding.dateDialogBtn.text.toString()),
@@ -110,15 +119,14 @@ class AddTaskFragment : Fragment() {
                 progressPercentage = binding.progressSlider.value.toInt(),
                 image = imageUri?.toString(),
             )
-            viewModel.addTask(task)
+            if (task.title.isEmpty()) {
+                binding.taskTitleET.error = "Task title is required"
+            } else {
+                viewModel.addTask(task)
+                AlarmUtils.setAlarmNotification(requireContext(),task)
+                findNavController().navigate(R.id.action_addTaskFragment_to_taskListFragment)
+            }
 
-            AlarmUtils.setAlarmNotification(requireContext(),task)
-
-            findNavController().navigate(R.id.action_addTaskFragment_to_taskListFragment)
         }
-    }
-
-    private fun generateUniqueId(): Long {
-        return System.currentTimeMillis()
     }
 }

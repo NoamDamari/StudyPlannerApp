@@ -4,7 +4,7 @@
         <item name="boxStrokeColor">@color/edit_text_color_selector</item>
         <item name="boxStrokeWidth">2dp</item>
         <item name="hintTextColor">@color/edit_text_color_selector</item>
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="labelStyle">@color/edit_text_color_selector</item>
         <item name="colorControlActivated">@color/edit_text_color_selector</item>
         <item name="hintTextAppearance">@style/TextAppearance.Material3.BodyMedium</item>
     </style>

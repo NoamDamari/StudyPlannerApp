@@ -5,12 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.studyplannerapp.data.models.Task
+import com.example.studyplannerapp.data.models.User
 
-@Database(entities = [Task::class], version = 1, exportSchema = false)
+@Database(entities = [Task::class, User::class], version = 1, exportSchema = false)
 abstract class TasksDataBase : RoomDatabase() {
 
     abstract fun tasksDao(): TasksDao
-
+    abstract fun usersDao(): UserDao
     companion object {
 
         @Volatile

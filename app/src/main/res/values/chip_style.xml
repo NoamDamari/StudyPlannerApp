@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="chipStyle" parent="@style/Widget.Material3.Chip.Suggestion">
+        <item name="chipBackgroundColor">@color/blue_100</item>
+        <item name="rippleColor">@color/blue_500</item>
+        <item name="chipStrokeColor">#63A3CF</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipStartPadding">12dp</item>
+        <item name="chipEndPadding">12dp</item>
+        <item name="chipIcon">@drawable/icon_calendar</item>
+        <item name="chipIconVisible">true</item>
+        <item name="chipIconSize">20dp</item>
+        <item name="chipIconTint">#1A4D70</item>
+        <item name="iconStartPadding">2dp</item>
+        <item name="iconEndPadding">0dp</item>
+    </style>
+</resources>

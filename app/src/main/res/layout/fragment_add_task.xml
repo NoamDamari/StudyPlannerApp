@@ -8,193 +8,256 @@
     android:padding="10dp"
     tools:context=".ui.add_task.AddTaskFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        style="@style/editTextStyle"
-        android:theme="@style/TextInputLayoutAppearance"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pickImageBtn"
-        app:layout_constraintVertical_chainStyle="spread">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/taskTitleET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/task_name"
-            android:colorControlActivated="@color/edit_text_color_selector"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.slider.Slider
-        android:id="@+id/progressSlider"
-        style="@style/sliderStyle"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:stepSize="1"
-        android:value="0.0"
-        android:valueFrom="0.0"
-        android:valueTo="100.0"
-        app:layout_constraintBottom_toTopOf="@+id/descriptionTextLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateDialogBtn"
-        app:tickVisible="false" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/taskTitleTF"
+            style="@style/editTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:theme="@style/TextInputLayoutAppearance"
+            app:endIconDrawable="@drawable/icon_remove"
+            app:endIconMode="clear_text"
+            app:hintEnabled="true"
+            android:textColorHint="#7C7F8F"
+            app:layout_constraintBottom_toTopOf="@+id/outlinedTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/icon_edit">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/taskTitleET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:colorControlActivated="@color/edit_text_color_selector"
+                android:hint="@string/task_name"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/progressSlider"
+            style="@style/sliderStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:stepSize="1"
+            android:value="0.0"
+            android:valueFrom="0.0"
+            android:valueTo="100.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateDialogBtn"
+            app:tickVisible="false" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout6"
+            style="@style/CustomTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:gravity="center"
+            android:hint="@string/type"
+            app:layout_constraintBottom_toBottomOf="@+id/outlinedTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/outlinedTextField"
+            app:layout_constraintTop_toTopOf="@+id/outlinedTextField">
+
+            <AutoCompleteTextView
+                android:id="@+id/taskTypeTF"
+                style="@style/CustomAutoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/blue_100"
+                android:ellipsize="end"
+                android:inputType="none"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:singleLine="true"
+                android:textColor="@color/blue_500"
+                app:simpleItems="@array/task_types_options" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextField"
+            style="@style/editTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="@string/course"
+            android:textColorHint="@color/hint_color"
+            android:theme="@style/TextInputLayoutAppearance"
+            app:layout_constraintBottom_toTopOf="@+id/dateDialogBtn"
+            app:layout_constraintEnd_toStartOf="@+id/textInputLayout6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/taskTitleTF">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/courseET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/dateDialogBtn"
+            style="@style/elevatedButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/blue_500"
+            android:gravity="center"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minHeight="52dp"
+            android:text="@string/set_deadline"
+            android:textColor="#F6F6F6"
+            app:icon="@drawable/icon_calendar"
+            app:iconSize="28dp"
+            app:iconTint="#F6F6F6"
+            app:layout_constraintBottom_toTopOf="@+id/progressSlider"
+            app:layout_constraintEnd_toStartOf="@+id/toRecognizeTextBtn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small" />
+
+        <Button
+            android:id="@+id/toRecognizeTextBtn"
+            style="@style/Widget.Material3.Button.TonalButton.Icon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/description"
+            android:textColor="#F6F6F6"
+            android:textSize="18sp"
+            android:backgroundTint="@color/blue_500"
+            app:icon="@drawable/icon_upload"
+            app:iconSize="24dp"
+            app:iconTint="#F6F6F6"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
+            app:layout_constraintBottom_toBottomOf="@+id/dateDialogBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/dateDialogBtn"
+            app:layout_constraintTop_toTopOf="@+id/dateDialogBtn" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="@color/blue_400"
+        android:padding="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/pickImageBtn"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_image"
+            android:textColor="@color/blue_500"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:icon="@drawable/icon_upload"
+            app:iconSize="24dp"
+            app:iconTint="@color/blue_500"
+            app:layout_constraintBottom_toBottomOf="@+id/taskImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/taskImage" />
+
+        <ImageView
+            android:id="@+id/taskImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="#E6F0F8"
+            android:src="@drawable/icon_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/descriptionTextLayout"
+        style="@style/editTextStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         android:maxHeight="220dp"
-        android:layout_marginBottom="16dp"
-        style="@style/editTextStyle"
+        android:textColorHint="#737373"
         android:theme="@style/TextInputLayoutAppearance"
+        app:endIconDrawable="@drawable/icon_remove"
+        app:endIconMode="clear_text"
         app:layout_constraintBottom_toTopOf="@+id/finishBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressSlider">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
+        app:layout_constraintVertical_bias="0.0"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraSmall">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/taskDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"
-            android:hint="@string/description"
+            android:hint="@string/add_description"
             android:inputType="textMultiLine"
             android:minLines="7"
             android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout6"
-        style="@style/CustomTextInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:hint="@string/type"
-        app:layout_constraintBottom_toTopOf="@+id/dateDialogBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/outlinedTextField"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
-        app:startIconDrawable="@drawable/icon_assignment">
-
-        <AutoCompleteTextView
-            android:id="@+id/taskTypeTF"
-            style="@style/CustomAutoCompleteTextView"
-            android:backgroundTint="@color/blue_100"
-            android:textColor="@color/blue_500"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:paddingTop="16dp"
-            android:paddingEnd="16dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            app:simpleItems="@array/task_types_options" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlinedTextField"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/course"
-        style="@style/editTextStyle"
-        android:theme="@style/TextInputLayoutAppearance"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout6"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayout6"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout6"
-        app:layout_constraintVertical_bias="0.5"
-        app:startIconDrawable="@drawable/icon_assignment">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/courseET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/dateDialogBtn"
-        style="@style/buttonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:gravity="center"
-        android:text="@string/select_date"
-        app:icon="@drawable/icon_calendar"
-        app:layout_constraintBottom_toTopOf="@+id/progressSlider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
-
-    <Button
-        android:id="@+id/pickImageBtn"
-        style="@style/buttonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/pick_image"
-        app:icon="@drawable/icon_camera"
-        app:iconSize="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="@+id/taskImage"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/taskImage"
-        app:layout_constraintTop_toBottomOf="@+id/taskImage" />
-
-    <Button
-        android:id="@+id/toRecognizeTextBtn"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload"
-        android:textSize="18sp"
-        android:textColor="@color/blue_500"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionTextLayout" />
-
-    <ImageView
-        android:id="@+id/taskImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/icon_camera"
-        android:background="@drawable/rounded_background"
-        app:layout_constraintBottom_toTopOf="@+id/pickImageBtn"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/finishBtn"
         style="@style/buttonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/finish"
+        android:layout_marginBottom="4dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minHeight="48dp"
+        android:text="@string/add_task"
+        android:textSize="20sp"
+        android:textColor="@color/white_200"
+        android:backgroundTint="#05385A"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/descriptionTextLayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/descriptionTextLayout" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3515732" />
+        app:layout_constraintGuide_percent="0.26" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,6 +20,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/rounded_background"
             android:src="@drawable/icon_assignment"
             app:layout_constraintBottom_toTopOf="@+id/taskSlider"
@@ -35,6 +36,7 @@
             android:ellipsize="end"
             android:gravity="start|center_vertical"
             android:singleLine="true"
+            android:paddingHorizontal="8dp"
             android:text="@string/title"
             android:textAlignment="viewStart"
             android:textColor="@color/blue_500"
@@ -51,11 +53,12 @@
 
         <TextView
             android:id="@+id/taskDeadlineTV"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:singleLine="true"
+            android:paddingHorizontal="8dp"
             android:text="@string/deadline"
             android:textColor="@color/blue_500"
             android:textSize="20sp"
@@ -64,6 +67,7 @@
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@+id/taskImageView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/taskImageView"
             app:layout_constraintStart_toStartOf="@+id/taskTitleTV"
             app:layout_constraintTop_toBottomOf="@+id/taskTitleTV" />

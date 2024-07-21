@@ -5,20 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.studyplannerapp.R
-import com.example.studyplannerapp.databinding.FragmentEditTaskBinding
 import com.example.studyplannerapp.databinding.FragmentTaskDetailsBinding
 import com.example.studyplannerapp.ui.SingleTaskViewModel
-import com.example.studyplannerapp.ui.TasksViewModel
 
 class TaskDetailsFragment : Fragment() {
 
     private var _binding: FragmentTaskDetailsBinding? = null
     private val binding get() = _binding!!
-    //private val viewModel: TasksViewModel by activityViewModels()
     private val taskViewModel: SingleTaskViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,17 +39,43 @@ class TaskDetailsFragment : Fragment() {
             taskViewModel.setId(it)
         }
 
-        taskViewModel.task.observe(viewLifecycleOwner) {
+        taskViewModel.editedTask.observe(viewLifecycleOwner) {
             binding.taskTitle.text = it.title
             binding.taskDescription.text = it.description
             binding.taskType.text = it.type
             binding.taskCourse.text = it.course
             binding.taskDate.text = it.getFormattedDeadline()
-            binding.taskSlider.value = it.progressPercentage.toFloat()
-            binding.taskSlider.isEnabled = false
+            binding.taskSlider.apply {
+                isEnabled = false
+                thumbWidth = 0
+                thumbTrackGapSize = 0
+                value = it.progressPercentage.toFloat()
+            }
 
-            Glide.with(requireContext()).load(it.image).circleCrop()
-                .into(binding.taskImage)
+            val progress = it.progressPercentage.toString() + getString(R.string.precentage_sign)
+            binding.progressTV.text = progress
+
+            if(it.image == null) {
+                binding.taskImage.setImageResource(setImageByType(it.type))
+            }
+            else {
+                val requestOptions = RequestOptions()
+                    .transform(CenterCrop(), RoundedCorners(30))
+
+                Glide.with(binding.root)
+                    .load(it.image)
+                    .apply(requestOptions)
+                    .into(binding.taskImage)
+            }
+        }
+    }
+    private fun setImageByType(type: String): Int {
+        return when (type) {
+            getString(R.string.assignment) -> R.drawable.icon_assignment
+            getString(R.string.exam) -> R.drawable.icon_exam
+            getString(R.string.lesson) -> R.drawable.icon_video
+            getString(R.string.project) -> R.drawable.icon_project
+            else -> R.drawable.icon_logo
         }
     }
 }

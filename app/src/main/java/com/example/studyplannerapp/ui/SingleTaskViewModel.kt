@@ -1,34 +1,67 @@
 package com.example.studyplannerapp.ui
 
 import android.app.Application
-import android.net.Uri
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import com.example.studyplannerapp.data.models.Task
-import com.example.studyplannerapp.data.repositories.TasksRepository
+import com.example.studyplannerapp.data.repositories.tasks.TasksRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SingleTaskViewModel: ViewModel(){
+
     private val repository = TasksRepository(application = Application())
     private val _id = MutableLiveData<Long>()
-    private val _temporaryTask = MutableLiveData<Task>()
-    val temporaryTask: MutableLiveData<Task> get() = _temporaryTask
 
-    val task = _id.switchMap {
-        repository.getTask(it)
+    val editedTask = MutableLiveData<Task>()
+
+    val selectedTask: LiveData<Task> = _id.switchMap { id ->
+        repository.getTask(id)
     }
+
+    private val mediator = MediatorLiveData<Task>().apply {
+        addSource(selectedTask) { task ->
+            value = task?.copy()
+        }
+    }
+
+    init {
+        mediator.observeForever { task ->
+            editedTask.value = task
+        }
+    }
+
     fun setId(id: Long){
         _id.value = id
     }
-    fun setTempTaskDescription(description: String) {
-        val tempTask = _temporaryTask.value ?: Task()
-        tempTask.description = description
-        _temporaryTask.value = tempTask
+
+    fun updateTask(task: Task) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateTask(task)
+        }
     }
-    fun setTempTaskImage(imageUri: Uri?) {
-        val tempTask = _temporaryTask.value ?: Task()
-        tempTask.image = imageUri?.toString()
-        _temporaryTask.value = tempTask
+
+    fun updateTemporaryTaskFromUI(
+        title: String,
+        description: String,
+        deadline: Long,
+        type: String,
+        course: String,
+        progressPercentage: Int,
+        image: String?
+    ) {
+        val updatedTask = editedTask.value ?: Task()
+        updatedTask.title = title
+        updatedTask.description = description
+        updatedTask.deadline = deadline
+        updatedTask.type = type
+        updatedTask.course = course
+        updatedTask.progressPercentage = progressPercentage
+        updatedTask.image = image ?: updatedTask.image
+        editedTask.value = updatedTask
     }
 }
