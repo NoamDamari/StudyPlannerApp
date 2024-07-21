@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".ui.TextRecognitionFragment">
+    android:background="#F1FDFF"
+    tools:context=".ui.text_recognition.TextRecognitionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <ImageView
         android:id="@+id/descriptionImage"
@@ -16,22 +16,23 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/rounded_image_background"
-        android:padding="16dp"
-        android:src="@drawable/icon_camera"
+        android:padding="8dp"
+
+        android:src="@drawable/icon_image"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        />
+        android:contentDescription="Description image for recognize" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4528044" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <Button
         android:id="@+id/uploadBtn"
@@ -39,8 +40,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:backgroundTint="#282D47"
-        android:text="Upload"
+        android:backgroundTint="@color/blue_500"
+        android:text="@string/upload"
+        android:minHeight="50dp"
         android:textColor="#F6F6F6"
         app:icon="@drawable/icon_camera"
         app:iconSize="24dp"
@@ -55,7 +57,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:maxHeight="220dp"
+        app:endIconDrawable="@drawable/icon_remove"
+        app:endIconMode="clear_text"
         android:theme="@style/TextInputLayoutAppearance"
         app:layout_constraintBottom_toTopOf="@+id/setDescriptionBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,8 +86,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:backgroundTint="#D1D8FF"
-        android:text="Recognize Text"
+        android:minHeight="50dp"
+        android:backgroundTint="#DAE5ED"
+        android:text="@string/process_text"
+        android:textColor="@color/blue_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/uploadBtn" />
@@ -93,22 +100,26 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#232743"
-        android:text="Set Description"
-        android:textSize="20dp"
+        android:text="@string/set_description"
+        android:textSize="20sp"
         android:textColor="#F6F6F6"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minHeight="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView11"
+    <ProgressBar
+        android:id="@+id/textProgressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Select an image from your gallery"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/recognizedDescriptionLayout"
+        app:layout_constraintEnd_toEndOf="@+id/recognizedDescriptionLayout"
+        app:layout_constraintStart_toStartOf="@+id/recognizedDescriptionLayout"
+        app:layout_constraintTop_toTopOf="@+id/recognizedDescriptionLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

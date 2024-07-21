@@ -1,7 +1,6 @@
-package com.example.studyplannerapp.ui
+package com.example.studyplannerapp.ui.text_recognition
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,28 +10,24 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.example.studyplannerapp.R
 import com.example.studyplannerapp.databinding.FragmentTextRecognitionBinding
-import com.example.studyplannerapp.utils.CameraPermissionHandler
-import com.example.studyplannerapp.utils.PermissionHandler
+import com.example.studyplannerapp.ui.TasksViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.TextRecognizer
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
-import java.io.IOException
 
 class TextRecognitionFragment : Fragment() {
 
     private var _binding: FragmentTextRecognitionBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: SingleTaskViewModel by activityViewModels()
+    private val viewModel: TasksViewModel by activityViewModels()
 
     // Launcher for picking an image from the device storage
     private val pickImageLauncher: ActivityResultLauncher<Array<String>> =
@@ -75,6 +70,10 @@ class TextRecognitionFragment : Fragment() {
         binding.uploadBtn.setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
+        // Set click listener for the image upload
+        binding.descriptionImage.setOnClickListener {
+            pickImageLauncher.launch(arrayOf("image/*"))
+        }
 
         // Set click listener for the recognize text button
         binding.recognizeTextBtn.setOnClickListener {
@@ -83,10 +82,14 @@ class TextRecognitionFragment : Fragment() {
 
         // Set the recognized text as description
         binding.setDescriptionBtn.setOnClickListener {
+
             val description = binding.recognizedDescription.text.toString()
-            val bundle = Bundle()
-            bundle.putString("description", description)
-            findNavController().navigate(R.id.action_textRecognitionFragment_to_addTaskFragment , bundle)
+
+            val result = Bundle().apply {
+                putString("description", description)
+            }
+            setFragmentResult("requestKey", result)
+            findNavController().popBackStack()
         }
 
         // Observe changes in temporaryTask LiveData and update UI accordingly
@@ -101,19 +104,32 @@ class TextRecognitionFragment : Fragment() {
         _binding = null
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.updateTemporaryTaskDescriptionFromUI(
+            binding.recognizedDescription.text.toString()
+        )
+    }
+
     /**
      * Recognize text from the selected image
     */
     private fun recognizeText() {
+
+        binding.textProgressBar.visibility = View.VISIBLE
+
         viewModel.temporaryTask.value?.image?.toUri()?.let { uri ->
             val image = InputImage.fromFilePath(requireContext(), uri)
             val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-            val result = recognizer.process(image)
+            recognizer.process(image)
                 .addOnSuccessListener { visionText ->
                     extractRecognizedText(visionText.text)
                 }
                 .addOnFailureListener { _ ->
                     showSnackbar("Text Recognition Failed")
+                }
+                .addOnCompleteListener {
+                    binding.textProgressBar.visibility = View.GONE
                 }
         } ?: run {
             showSnackbar("No image selected")

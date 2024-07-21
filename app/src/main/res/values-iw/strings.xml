@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">StudyPlannerApp</string>
     <string name="title">כותרת</string>
-    <string name="deadline">דדליין</string>
+    <string name="deadline">תאריך הגשה</string>
     <string name="hello">שלום</string>
     <string name="user_name">שם משתמש</string>
     <string name="pick_image">תמונה</string>
@@ -26,5 +26,40 @@
     <string name="save_changes">שמור שינויים</string>
     <string name="edit">עריכה</string>
     <string name="delete">מחיקה</string>
-    <string name="open_tasks_count">"יש לך %1$d מטלות "</string>
+    <string name="open_tasks_count">"יש לך %1$d משימות "</string>
+    <string name="precentage_sign">%</string>
+    <string name="sign_up">הרשמה</string>
+    <string name="name">שם משתמש</string>
+    <string name="email">מייל</string>
+    <string name="phone">פלאפון</string>
+    <string name="password">סיסמא</string>
+    <string name="register">הירשם</string>
+    <string name="sign_in">התחברות</string>
+    <string name="login">כניסה</string>
+    <string name="don_t_have_an_account_yet">לא נרשמת עדיין?</string>
+    <string name="create">צור חשבון</string>
+    <string name="add_task">הוספת משימה</string>
+    <string name="set_deadline">תאריך הגשה</string>
+    <string name="change_image">עדכון תמונה</string>
+    <string name="task_image">תמונת המטלה</string>
+    <string name="edit_description">ערוך תיאור</string>
+    <string name="update_deadline">עדכון תאריך הגשה</string>
+    <string name="task_title">שם משימה</string>
+    <string name="not_specified">לא הוגדר</string>
+    <string name="no_description_provided">לא הוגדר תיאור</string>
+    <string name="progress">התקדמות</string>
+    <string name="set_description">עדכון תיאור</string>
+    <string name="add_description">תיאור המשימה</string>
+    <string name="upload_image">העלאת תמונה</string>
+    <string name="task">משימה</string>
+    <string name="process_text">עיבוד טקסט</string>
+    <string name="upload">העלאה</string>
+    <string name="course_field">קורס:</string>
+    <string name="type_field">סוג המשימה:</string>
+    <string name="deadline_field">תאריך הגשה:</string>
+    <string name="update_image">עדכון תמונה</string>
+    <string name="set_profile_image">עדכון תמונה</string>
+    <string name="set_profile_detalis">עדכון פרטי משתמש</string>
+    <string name="set_profile">עדכון פרופיל</string>
+
 </resources>

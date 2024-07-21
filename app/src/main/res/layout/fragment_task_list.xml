@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".ui.all_tasks.TaskListFragment">
 
 
@@ -11,7 +12,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="8dp"
+
+        android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +29,7 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/blue_500" />
+            />
 
         <TextView
             android:id="@+id/textView"
@@ -37,168 +39,126 @@
             android:gravity="center_vertical"
             android:text="@string/hello"
             android:textColor="@color/blue_500"
-            android:textSize="24sp"
-            app:autoSizeMaxTextSize="24sp"
+            android:textSize="26sp"
+            app:autoSizeMaxTextSize="26sp"
             app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
-            app:layout_constraintEnd_toStartOf="@+id/materialButton2"
+            app:layout_constraintBottom_toTopOf="@+id/userNameTV"
+            app:layout_constraintEnd_toStartOf="@+id/signOutBtn"
             app:layout_constraintStart_toEndOf="@+id/userImageView"
             app:layout_constraintTop_toTopOf="@+id/userImageView"
             app:layout_constraintVertical_chainStyle="spread" />
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="0dp"
+            android:id="@+id/userNameTV"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:ellipsize="end"
             android:gravity="center_vertical"
+            android:singleLine="true"
             android:text="@string/user_name"
             android:textColor="@color/blue_500"
-            android:textSize="28sp"
+            android:textSize="30sp"
             android:textStyle="bold"
-            app:autoSizeMaxTextSize="28sp"
+            app:autoSizeMaxTextSize="30sp"
             app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@+id/userImageView"
-            app:layout_constraintEnd_toStartOf="@+id/materialButton2"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton"
+            android:id="@+id/userProfileBtn"
             style="@style/button_icon_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:icon="@drawable/icon_menu"
+            app:icon="@drawable/icon_user_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/materialButton2"
+            app:layout_constraintStart_toEndOf="@+id/signOutBtn"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton2"
+            android:id="@+id/signOutBtn"
             style="@style/button_icon_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/icon_logout"
-            app:layout_constraintBottom_toBottomOf="@+id/materialButton"
-            app:layout_constraintEnd_toStartOf="@+id/materialButton"
+            app:layout_constraintBottom_toBottomOf="@+id/userProfileBtn"
+            app:layout_constraintEnd_toStartOf="@+id/userProfileBtn"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/materialButton" />
+            app:layout_constraintTop_toTopOf="@+id/userProfileBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addTaskButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/blue_100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:srcCompat="@drawable/icon_plus"
-        app:tint="@color/blue_500" />
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/tasksRV"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:padding="4dp"
-            app:singleLine="true"
-            app:singleSelection="true">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_1"
-                style="@style/Widget.Material3.Chip.Suggestion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="All"
-                android:textSize="16sp" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_2"
-                style="@style/Widget.Material3.Chip.Suggestion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Deadline"
-                android:textSize="16sp" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_3"
-                style="@style/Widget.Material3.Chip.Suggestion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Progress"
-                android:textSize="16sp" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_4"
-                style="@style/Widget.Material3.Chip.Suggestion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textSize="16sp" />
-
-        </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tasksRV"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="4dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_background"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.16" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="sort by"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
-        app:layout_constraintStart_toStartOf="@+id/horizontalScrollView" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/open_tasks_count"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="#282E4E"
+        android:paddingVertical="4dp"
+        android:paddingStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addTaskButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/blue_100"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView4"
+            app:srcCompat="@drawable/icon_plus"
+            app:tint="@color/blue_500" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center_vertical"
+            android:text="@string/open_tasks_count"
+            android:textColor="@color/blue_200"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="32sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/addTaskButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

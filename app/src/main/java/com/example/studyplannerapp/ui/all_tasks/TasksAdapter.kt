@@ -50,7 +50,7 @@ class TasksAdapter(val listener: TaskItemListener) : RecyclerView.Adapter<TasksA
                         .into(binding.taskImageView)
                 } catch (e: Exception) {
                     // Handle the error or leave the ImageView empty
-                    binding.taskImageView.setImageResource(R.drawable.icon_assignment)
+                    binding.taskImageView.setImageResource(getImageByType(task.type))
                 }
 
                 binding.taskMenuButton.setOnClickListener {
@@ -74,12 +74,12 @@ class TasksAdapter(val listener: TaskItemListener) : RecyclerView.Adapter<TasksA
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(tasks[position]) {view , task ->
-            showTaskPopupMenu(view , task , position)
+        holder.bind(tasks[position]) { view, _ ->
+            showTaskPopupMenu(view , position)
         }
     }
 
-    private fun showTaskPopupMenu(view: View , task: Task , position: Int) {
+    private fun showTaskPopupMenu(view: View , position: Int) {
 
         val contextThemeWrapper = ContextThemeWrapper(view.context, R.style.popupMenuStyle)
         val taskMenu = PopupMenu(contextThemeWrapper , view)
@@ -88,7 +88,6 @@ class TasksAdapter(val listener: TaskItemListener) : RecyclerView.Adapter<TasksA
             when(menuOption.itemId) {
 
                 R.id.action_edit -> {
-                    // TODO: Call onEditClickListener
                     listener.onEditOptionClicked(position)
                     true
                 }
@@ -114,5 +113,15 @@ class TasksAdapter(val listener: TaskItemListener) : RecyclerView.Adapter<TasksA
         fun onDeleteOptionClicked(position: Int)
         fun onEditOptionClicked(position: Int)
         fun onTaskLongClick(position: Int)
+    }
+
+   fun getImageByType(type: String): Int {
+        return when (type) {
+            "Assignment" -> R.drawable.icon_assignment
+            "Exam" -> R.drawable.icon_exam
+            "Lesson" -> R.drawable.icon_video
+            "Project" -> R.drawable.icon_project
+            else -> R.drawable.icon_logo
+        }
     }
 }

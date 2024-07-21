@@ -1,20 +1,15 @@
-package com.example.studyplannerapp.data.repositories
+package com.example.studyplannerapp.data.repositories.tasks
 
 import android.app.Application
 import com.example.studyplannerapp.data.local_db.TasksDao
 import com.example.studyplannerapp.data.local_db.TasksDataBase
 import com.example.studyplannerapp.data.models.Task
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlin.coroutines.CoroutineContext
-
 class TasksRepository(application: Application) {
 
-    private var tasksDao:TasksDao?
-
+    private var tasksDao :TasksDao?
     init {
         val database = TasksDataBase.getDatabase(application)
-        tasksDao = database?.tasksDao()
+        tasksDao = database.tasksDao()
     }
 
     fun getAllTasks() = tasksDao?.getAllTasks()

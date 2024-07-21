@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1095469386945",
+    "project_id": "tasks-34c64",
+    "storage_bucket": "tasks-34c64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095469386945:android:2fe03336dba3491bc95840",
+        "android_client_info": {
+          "package_name": "com.example.studyplannerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMCABnb2EsfuxoxOHiwlZeRVnL4Jsy7-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

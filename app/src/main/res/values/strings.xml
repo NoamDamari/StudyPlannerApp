@@ -8,6 +8,7 @@
     <string name="pick_image">Pick Image</string>
     <string name="select_date">Select Date</string>
     <string name="finish">Finish</string>
+    <string name="task">Task</string>
     <string name="task_name">Task name</string>
     <string name="course">Course</string>
     <string name="type">Type</string>
@@ -35,8 +36,43 @@
     <string name="save_changes">Save Changes</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
-    <string name="open_tasks_count">You have %1$d open tasks</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_tasks_count">You have %1$d \n open tasks</string>
+    <string name="upcoming_tasks_count">You have %1$d \n upcoming tasks</string>
+    <string name="precentage_sign">%</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="sign_in">Sign In</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_yet">Don\'t have an account yet?</string>
+    <string name="create">create</string>
+    <string name="welcome_to_n_study_planner_app" translatable="false">Welcome to \n Study Planner App!</string>
+    <string name="app_logo_icon">app logo icon</string>
+    <string name="add_task">Add Task</string>
+    <string name="set_deadline">Set Deadline</string>
+    <string name="change_image">Change Image</string>
+    <string name="task_image">Task Image</string>
+    <string name="edit_description">Edit Description</string>
+    <string name="update_deadline">Update Deadline</string>
+    <string name="task_title">Task Title</string>
+    <string name="not_specified">Not specified</string>
+    <string name="no_description_provided">No description provided</string>
+    <string name="progress">Progress</string>
+    <string name="set_description">Set Description</string>
+    <string name="add_description">Add Description</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="process_text">Process Text</string>
+    <string name="upload">Upload</string>
+    <string name="get_started">Get Started</string>
+    <string name="course_field">Course:</string>
+    <string name="type_field">Type:</string>
+    <string name="deadline_field">Deadline:</string>
+    <string name="update_image">Update image</string>
+    <string name="set_profile_image">Set Profile Image</string>
+    <string name="set_profile_detalis">Set Profile Detalis</string>
+    <string name="set_profile">Set Profile</string>
 
 </resources>

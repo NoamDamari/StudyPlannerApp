@@ -3,7 +3,6 @@ package com.example.studyplannerapp.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.studyplannerapp.R
-import com.example.studyplannerapp.utils.CameraPermissionHandler
 import com.example.studyplannerapp.utils.PermissionHandler
 
 class MainActivity : AppCompatActivity() {

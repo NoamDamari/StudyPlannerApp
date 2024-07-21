@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -17,7 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.studyplannerapp.R
 import com.example.studyplannerapp.databinding.FragmentEditTaskBinding
-import com.example.studyplannerapp.ui.TasksViewModel
+import com.example.studyplannerapp.ui.SingleTaskViewModel
 import com.example.studyplannerapp.utils.AlarmUtils
 import com.example.studyplannerapp.utils.DateTimeUtils
 import com.google.android.material.datepicker.CalendarConstraints
@@ -31,7 +31,7 @@ class EditTaskFragment : Fragment() {
     private val binding get() = _binding!!
     private var imageUri: Uri? = null
     private var pickImageClicked: Boolean = false
-    private val viewModel: TasksViewModel by activityViewModels()
+    private val taskViewModel: SingleTaskViewModel by viewModels()
 
     private val pickImageLauncher: ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -71,6 +71,12 @@ class EditTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.getLong("id")?.let {
+            if(it != taskViewModel.selectedTask.value?.id){
+                taskViewModel.setId(it)
+            }
+        }
+
         val datePicker: MaterialDatePicker<Long> by lazy {
             val constraintsBuilder =
                 CalendarConstraints.Builder()
@@ -96,23 +102,24 @@ class EditTaskFragment : Fragment() {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
 
-        viewModel.selectedTask.observe(viewLifecycleOwner) { task ->
+        taskViewModel.editedTask.observe(viewLifecycleOwner) { task ->
 
             binding.taskTitleEdit.setText(task.title)
             binding.taskDescriptionEdit.setText(task.description)
-            binding.taskTypeEdit.setText(task.type)
+            binding.taskTypeEdit.setText(task.type , false)
             binding.taskCourseEdit.setText(task.course)
             binding.taskSliderEdit.value = task.progressPercentage.toFloat()
             binding.taskDateEditBtn.text = task.getFormattedDeadline()
 
-            // Load image using Glide, fallback to task.image if available
-            task.image?.let { imageUrl ->
-                // Apply transformations
+            if(task.image == null) {
+                binding.taskImageEdit.setImageResource(setImageByType(task.type))
+            }
+            else {
                 val requestOptions = RequestOptions()
                     .transform(CenterCrop(), RoundedCorners(30))
 
                 Glide.with(binding.root)
-                    .load(imageUrl)
+                    .load(task.image)
                     .apply(requestOptions)
                     .into(binding.taskImageEdit)
             }
@@ -120,9 +127,9 @@ class EditTaskFragment : Fragment() {
 
         binding.saveChangesBtn.setOnClickListener {
 
-            val currentDeadline = viewModel.selectedTask.value?.deadline
+            val currentDeadline = taskViewModel.selectedTask.value?.deadline
 
-            viewModel.selectedTask.value?.apply {
+            taskViewModel.editedTask.value?.apply {
                 title = binding.taskTitleEdit.text.toString()
                 description = binding.taskDescriptionEdit.text.toString()
                 deadline = DateTimeUtils.parseStringToDate(binding.taskDateEditBtn.text.toString())
@@ -132,9 +139,9 @@ class EditTaskFragment : Fragment() {
                 image = imageUri?.toString() ?: this.image
             }
 
-            viewModel.selectedTask.value?.let { task ->
+            taskViewModel.editedTask.value?.let { task ->
 
-                viewModel.updateTask(task)
+                taskViewModel.updateTask(task)
 
                 // Update alarm notification if task deadline has changed
                 if(task.deadline != currentDeadline) {
@@ -149,6 +156,29 @@ class EditTaskFragment : Fragment() {
                 }
             }
             findNavController().navigate(R.id.action_editTaskFragment_to_taskListFragment)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        taskViewModel.updateTemporaryTaskFromUI(
+            title = binding.taskTitleEdit.text.toString(),
+            description = binding.taskDescriptionEdit.text.toString(),
+            deadline = DateTimeUtils.parseStringToDate(binding.taskDateEditBtn.text.toString()),
+            type = binding.taskTypeEdit.text.toString(),
+            course = binding.taskCourseEdit.text.toString(),
+            progressPercentage = binding.taskSliderEdit.value.toInt(),
+            image = imageUri?.toString()
+        )
+    }
+
+    private fun setImageByType(type: String): Int {
+        return when (type) {
+            "Assignment" -> R.drawable.icon_assignment
+            "Exam" -> R.drawable.icon_exam
+            "Lesson" -> R.drawable.icon_video
+            "Project" -> R.drawable.icon_project
+            else -> R.drawable.icon_logo
         }
     }
 }

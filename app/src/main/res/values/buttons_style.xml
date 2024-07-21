@@ -16,5 +16,9 @@
         <item name="backgroundTint">@color/blue_100</item>
         <item name="iconTint">@color/blue_500</item>
     </style>
+    
+    <style name="elevatedButtonStyle" parent="Widget.Material3.Button.ElevatedButton.Icon">
+
+    </style>
 
 </resources>
