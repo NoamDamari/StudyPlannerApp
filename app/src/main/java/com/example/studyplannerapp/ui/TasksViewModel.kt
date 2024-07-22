@@ -61,4 +61,17 @@ class TasksViewModel(application: Application) : AndroidViewModel(application) {
         updatedTask.description = description
         _temporaryTask.value = updatedTask
     }
+
+    fun setTempTaskDate(date: Long) {
+        val tempTask = _temporaryTask.value ?: Task()
+        tempTask.deadline = date
+        _temporaryTask.value = tempTask
+    }
+
+    fun resetTemporaryTask() {
+        val currentDate = _temporaryTask.value?.deadline ?: System.currentTimeMillis()
+        _temporaryTask.value = Task().apply {
+            deadline = currentDate
+        }
+    }
 }

@@ -90,6 +90,7 @@ class TextRecognitionFragment : Fragment() {
             }
             setFragmentResult("requestKey", result)
             findNavController().popBackStack()
+            viewModel.resetTemporaryTask()
         }
 
         // Observe changes in temporaryTask LiveData and update UI accordingly
