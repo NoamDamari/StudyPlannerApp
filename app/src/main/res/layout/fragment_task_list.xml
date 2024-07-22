@@ -37,6 +37,8 @@
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:gravity="center_vertical"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="@string/hello"
             android:textColor="@color/blue_500"
             android:textSize="26sp"
@@ -45,7 +47,7 @@
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@+id/userNameTV"
-            app:layout_constraintEnd_toStartOf="@+id/signOutBtn"
+            app:layout_constraintEnd_toStartOf="@+id/userProfileBtn"
             app:layout_constraintStart_toEndOf="@+id/userImageView"
             app:layout_constraintTop_toTopOf="@+id/userImageView"
             app:layout_constraintVertical_chainStyle="spread" />
@@ -54,8 +56,8 @@
             android:id="@+id/userNameTV"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:ellipsize="end"
             android:gravity="center_vertical"
+            android:ellipsize="end"
             android:singleLine="true"
             android:text="@string/user_name"
             android:textColor="@color/blue_500"
@@ -76,21 +78,8 @@
             android:layout_height="wrap_content"
             app:icon="@drawable/icon_user_2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/signOutBtn"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/signOutBtn"
-            style="@style/button_icon_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:icon="@drawable/icon_logout"
-            app:layout_constraintBottom_toBottomOf="@+id/userProfileBtn"
-            app:layout_constraintEnd_toStartOf="@+id/userProfileBtn"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/userProfileBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -118,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="@drawable/rounded_background"
-        android:backgroundTint="#282E4E"
+        android:backgroundTint="#2C435E"
         android:paddingVertical="4dp"
         android:paddingStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,6 +141,7 @@
             app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/addTaskButton"
             app:layout_constraintHorizontal_bias="0.5"

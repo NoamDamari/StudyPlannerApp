@@ -20,14 +20,10 @@ class TaskDetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private val taskViewModel: SingleTaskViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTaskDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -77,5 +73,10 @@ class TaskDetailsFragment : Fragment() {
             getString(R.string.project) -> R.drawable.icon_project
             else -> R.drawable.icon_logo
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

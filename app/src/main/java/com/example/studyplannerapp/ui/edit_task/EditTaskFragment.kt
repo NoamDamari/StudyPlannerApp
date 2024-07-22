@@ -181,5 +181,10 @@ class EditTaskFragment : Fragment() {
             else -> R.drawable.icon_logo
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
 

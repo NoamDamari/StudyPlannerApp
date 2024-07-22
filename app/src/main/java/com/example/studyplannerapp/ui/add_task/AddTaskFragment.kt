@@ -76,9 +76,9 @@ class AddTaskFragment : Fragment() {
                 .build()
         }
 
+        // Set up FragmentResultListener to receive description from TextRecognitionFragment
         setFragmentResultListener("requestKey") { _, bundle ->
             val description = bundle.getString("description")
-            // Update the UI with the received description
             binding.taskDescription.setText(description)
         }
 
@@ -90,20 +90,21 @@ class AddTaskFragment : Fragment() {
         // Click listener to set selected date
         datePicker.addOnPositiveButtonClickListener {
             binding.dateDialogBtn.text = datePicker.headerText
+            viewModel.setTempTaskDate(DateTimeUtils.parseStringToDate(datePicker.headerText))
         }
 
-        // Click listener to launch image picker
+        // Launch image picker when the button is clicked
         binding.pickImageBtn.setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
 
-        // Click listener to launch image picker
+        // Launch image picker when the task image is clicked
         binding.taskImage.setOnClickListener {
             pickImageLauncher.launch(arrayOf("image/*"))
         }
 
+        // Navigate to TextRecognitionFragment when the button is clicked
         binding.toRecognizeTextBtn.setOnClickListener {
-
             findNavController().navigate(R.id.action_addTaskFragment_to_textRecognitionFragment)
         }
 
@@ -123,10 +124,15 @@ class AddTaskFragment : Fragment() {
                 binding.taskTitleET.error = "Task title is required"
             } else {
                 viewModel.addTask(task)
+                viewModel.resetTemporaryTask()
                 AlarmUtils.setAlarmNotification(requireContext(),task)
                 findNavController().navigate(R.id.action_addTaskFragment_to_taskListFragment)
             }
-
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

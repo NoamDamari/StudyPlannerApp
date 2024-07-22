@@ -40,6 +40,8 @@
                 android:layout_height="wrap_content"
                 android:colorControlActivated="@color/edit_text_color_selector"
                 android:hint="@string/task_name"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -68,6 +70,7 @@
             android:layout_marginStart="4dp"
             android:gravity="center"
             android:hint="@string/type"
+            android:textColorHint="@color/hint_color"
             app:layout_constraintBottom_toBottomOf="@+id/outlinedTextFieldEdit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -97,7 +100,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             android:hint="@string/course"
-            android:textColorHint="#5C7C95"
+            android:textColorHint="@color/hint_color"
             android:theme="@style/TextInputLayoutAppearance"
             app:layout_constraintBottom_toTopOf="@+id/taskDateEditBtn"
             app:layout_constraintEnd_toStartOf="@+id/textInputLayout10"
@@ -108,7 +111,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/taskCourseEdit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -123,6 +128,8 @@
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:minHeight="52dp"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="@string/update_deadline"
             android:textColor="@color/blue_200"
             app:icon="@drawable/icon_calendar"
@@ -160,6 +167,8 @@
             android:textStyle="bold"
             app:icon="@drawable/icon_upload"
             app:iconSize="24dp"
+            android:ellipsize="end"
+            android:singleLine="true"
             app:iconTint="@color/blue_200"
             app:layout_constraintBottom_toBottomOf="@+id/taskImageEdit"
             app:layout_constraintEnd_toEndOf="parent"

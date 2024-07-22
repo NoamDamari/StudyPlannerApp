@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="#F1FDFF"
+    android:background="#F1F8FD"
     tools:context=".ui.text_recognition.TextRecognitionFragment">
 
 
@@ -59,6 +59,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:maxHeight="220dp"
+        android:textColorHint="@color/hint_color"
         app:endIconDrawable="@drawable/icon_remove"
         app:endIconMode="clear_text"
         android:theme="@style/TextInputLayoutAppearance"

@@ -9,5 +9,6 @@
     <color name="blue_500">#305C7A</color>
     <color name="blue_800">#1C183A</color>
     <color name="white_200">#F6F6F6</color>
-    <color name="hint_color">#71828F</color>
+    <color name="hint_color">#516777</color>
+    <color name="app_icon_bg">#CAEFFF</color>
 </resources>

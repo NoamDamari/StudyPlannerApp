@@ -81,9 +81,7 @@ class TaskListFragment : Fragment() , TasksAdapter.TaskItemListener {
         viewModel.tasksLiveData?.observe(viewLifecycleOwner) { tasks ->
 
             val openTasksText = getString(R.string.open_tasks_count, tasks.size)
-
             val spannable = SpannableString(openTasksText)
-
             val numberStart = openTasksText.indexOf(tasks.size.toString())
             val numberEnd = numberStart + tasks.size.toString().length
 
